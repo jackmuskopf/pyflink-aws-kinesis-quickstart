@@ -25,9 +25,32 @@ From here: https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-k
 
 <br>
 
-## Cons
-- what version of python is kda even running?
-- how to know on what platform numpy should be built
-- hard to see python traceback
-- hacky packaging required
-    - https://nightlies.apache.org/flink/flink-docs-master/docs/dev/python/dependency_management/#python-dependencies
+## Pyflink KDA Environment
+```
+{
+  "PythonVersion": "3.8.14 (default, Sep 14 2022, 20:30:29) \n[GCC 7.3.1 20180712 (Red Hat 7.3.1-6)]",
+  "Platform": "uname_result(system='Linux', node='flink-jobmanager-5857dcb74-mfxxz', release='5.4.204-113.362.amzn2.x86_64', version='#1 SMP Wed Jul 13 21:34:30 UTC 2022', machine='x86_64', processor='x86_64')",
+  "Packages": {
+    "numpy": {
+      "installed": true,
+      "version": "1.19.5"
+    },
+    "pyflink": {
+      "installed": true,
+      "version": null
+    },
+    "pandas": {
+      "installed": true,
+      "version": "1.1.5"
+    },
+    "boto3": {
+      "installed": false,
+      "version": null
+    },
+    "bafafafwa": {
+      "installed": false,
+      "version": null
+    }
+  }
+}
+```

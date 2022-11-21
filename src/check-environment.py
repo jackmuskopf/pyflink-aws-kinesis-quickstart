@@ -23,12 +23,18 @@ logging.basicConfig(level=logging.INFO)
 
 def check_package(pkg):
     try:
-        importlib.import_module(pkg)
+        module = importlib.import_module(pkg)
     except:
         imported = False
+        module = None
     else:
         imported = True
-    return {pkg: imported}
+    
+    if imported:
+        version = getattr(module, '__version__', None)
+    else:
+        version = None
+    return {pkg: {"installed": imported, "version": version}}
 
 
 modules = [
@@ -113,7 +119,8 @@ def create_table(table_name, stream_name, region, stream_initpos):
 
 def main():
 
-    logging.info(json.dumps(about, indent=2, default=str))
+    logging.info(str(about))
+    print(str(about))
     
     # Application Property Keys
     input_property_group_key = "consumer.config.0"
