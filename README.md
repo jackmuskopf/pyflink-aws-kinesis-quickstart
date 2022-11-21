@@ -26,6 +26,10 @@ From here: https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-k
 <br>
 
 ## Pyflink KDA Environment
+
+<br>
+
+### Python and numpy versions
 ```
 {
   "PythonVersion": "3.8.14 (default, Sep 14 2022, 20:30:29) \n[GCC 7.3.1 20180712 (Red Hat 7.3.1-6)]",
@@ -46,11 +50,51 @@ From here: https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-k
     "boto3": {
       "installed": false,
       "version": null
-    },
-    "bafafafwa": {
-      "installed": false,
-      "version": null
     }
   }
 }
+```
+
+<br>
+
+### `pip freeze` (as of 2022-11-21 in us-west-1)
+```
+apache-beam==2.27.0
+apache-flink @ file:///tmp/apache-flink-1.13.2.tar.gz
+apache-flink-libraries @ file:///tmp/apache-flink-libraries-1.13.2.tar.gz
+avro-python3==1.9.2.1
+certifi==2022.9.24
+charset-normalizer==2.1.1
+cloudpickle==1.2.2
+crcmod==1.7
+dill==0.3.1.1
+docopt==0.6.2
+fastavro==0.23.6
+future==0.18.2
+grpcio==1.50.0
+hdfs==2.7.0
+httplib2==0.17.4
+idna==3.4
+mock==2.0.0
+numpy==1.19.5
+oauth2client==4.1.3
+pandas==1.1.5
+pbr==5.11.0
+pip==22.3
+protobuf==3.20.3
+py4j==0.10.8.1
+pyarrow==2.0.0
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pydot==1.4.2
+pymongo==3.13.0
+pyparsing==3.0.9
+python-dateutil==2.8.0
+requests==2.28.1
+rsa==4.9
+setuptools==65.5.0
+six==1.16.0
+typing-extensions==3.7.4.3
+urllib3==1.26.12
+wheel==0.38.1
 ```

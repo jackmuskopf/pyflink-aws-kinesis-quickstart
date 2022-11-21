@@ -19,6 +19,8 @@ import json
 import time
 import logging
 
+from pip._internal.operations.freeze import freeze as pip_freeze
+
 logging.basicConfig(level=logging.INFO)
 
 def check_package(pkg):
@@ -121,6 +123,10 @@ def main():
 
     logging.info(str(about))
     print(str(about))
+
+    frozen = list(pip_freeze())
+    print("PIP_FREEZE:", str(frozen))
+    logging.info("PIP_FREEZE: " + str(frozen))
     
     # Application Property Keys
     input_property_group_key = "consumer.config.0"
