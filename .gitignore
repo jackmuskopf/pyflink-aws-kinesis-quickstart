@@ -1,0 +1,11 @@
+pkg
+pkg.zip
+
+.terraform
+.terraform*
+
+pydeps/*
+!pydeps/.gitignore
+
+jars/*
+!jars/.gitignore
