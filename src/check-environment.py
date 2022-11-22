@@ -70,12 +70,12 @@ is_local = (
 
 if is_local:
     # only for local, overwrite variable to properties and pass in your jars delimited by a semicolon (;)
-    APPLICATION_PROPERTIES_FILE_PATH = "application_properties.json"  # local
-
-    CURRENT_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+    CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+    APPLICATION_PROPERTIES_FILE_PATH =  os.path.join(CURRENT_DIR, "example_application_properties.json" )
+    JAR_DIR = os.path.realpath(os.path.join(CURRENT_DIR, '..', 'jars'))
     table_env.get_config().get_configuration().set_string(
         "pipeline.jars",
-        "file:///" + CURRENT_DIR + "/jars/flink-sql-connector-kinesis_2.12-1.13.2.jar",
+        "file:///" + JAR_DIR + "/flink-sql-connector-kinesis_2.12-1.13.2.jar",
         # "file:///" + CURRENT_DIR +"/jars/amazon-kinesis-sql-connector-flink-2.4.1-javadoc.jar"
     )
 
@@ -121,12 +121,9 @@ def create_table(table_name, stream_name, region, stream_initpos):
 
 def main():
 
-    logging.info(str(about))
-    print(str(about))
-
     frozen = list(pip_freeze())
-    print("PIP_FREEZE:", str(frozen))
     logging.info("PIP_FREEZE: " + str(frozen))
+    logging.info(str(about))
     
     # Application Property Keys
     input_property_group_key = "consumer.config.0"
@@ -171,7 +168,10 @@ def main():
                            .format(output_table_name, input_table_name))
 
     # get job status through TableResult
-    print(table_result.get_job_client().get_job_status())
+    logging.info(str(table_result.get_job_client().get_job_status()))
+    logging.info('Successfully processed main routine')
+
+
 
 
 if __name__ == "__main__":

@@ -7,5 +7,5 @@ output "output_stream_name" {
 }
 
 output "analytics_application_name" {
-    value = aws_kinesisanalyticsv2_application.analytics.name
+    value = aws_kinesisanalyticsv2_application.app.name
 }

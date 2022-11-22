@@ -24,9 +24,14 @@ RUN $MINICONDA_HOME/bin/conda create -n pyflink-1-13 python=3.8
 RUN $MINICONDA_HOME/envs/pyflink-1-13/bin/python -m pip install "apache-flink==1.13.6"
 
 ENV PATH "${PATH}:${MINICONDA_HOME}/bin"
-
-
 RUN echo "conda activate pyflink-1-13" >> ~/.bashrc
+
+# download kinesis connector JAR
+RUN mkdir -p /app/jars
+RUN wget -O /app/jars/flink-sql-connector-kinesis_2.12-1.13.2.jar \
+    https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kinesis_2.12/1.13.2/flink-sql-connector-kinesis_2.12-1.13.2.jar
+
+RUN ln -s $MINICONDA_HOME/envs/pyflink-1-13/bin/python /bin/pyflink
 
 # use "conda run -n pyflink-1-13 <my-python-command>" to run some python command or script in pyflink env
 # e.g. docker run -it pyflink conda run -n pyflink-1-13 python -c "import pyflink; print('Successfully imported pyflink')"

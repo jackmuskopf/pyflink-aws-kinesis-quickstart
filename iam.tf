@@ -66,27 +66,50 @@ resource "aws_iam_role_policy" "analytics" {
             "Resource": "${aws_cloudwatch_log_stream.stream.arn}"
         },
         {
-            "Sid": "DeleteMeTestLogs",
+            "Sid": "PutKPLMetrics",
             "Effect": "Allow",
-            "Action": [
-                "logs:*",
-                "cloudwatch:*"
-            ],
-            "Resource": "*"
+            "Resource": "*",
+            "Action": "cloudwatch:PutMetricData",
+            "Condition": {
+                "StringEquals": {
+                    "cloudwatch:namespace": "KinesisProducerLibrary"
+                }
+            }
         },
         {
             "Sid": "ReadInputStream",
             "Effect": "Allow",
-            "Action": "kinesis:*",
+            "Action": [
+                "kinesis:Describe*",
+                "kinesis:Get*",
+                "kinesis:List*",
+                "kinesis:RegisterStreamConsumer",
+                "kinesis:DeregisterStreamConsumer",
+                "kinesis:MergeShards",
+                "kinesis:SplitShard",
+                "kinesis:SubscribeToShard"
+            ],
             "Resource": "${aws_kinesis_stream.input.arn}"
         },
         {
             "Sid": "WriteOutputStream",
             "Effect": "Allow",
-            "Action": "kinesis:*",
+            "Action": [
+                "kinesis:Describe*",
+                "kinesis:Get*",
+                "kinesis:List*",
+                "kinesis:RegisterStreamConsumer",
+                "kinesis:DeregisterStreamConsumer",
+                "kinesis:MergeShards",
+                "kinesis:SplitShard",
+                "kinesis:SubscribeToShard",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords"
+            ],
             "Resource": "${aws_kinesis_stream.output.arn}"
         }
     ]
 }
+
 EOF
 }

@@ -1,10 +1,15 @@
+import sys
 import datetime
 import json
 import random
 import boto3
 import time
+import argparse
 
-STREAM_NAME = "qrs-kinesis-dev-input"
+parser = argparse.ArgumentParser()
+parser.add_argument('--stream-name', type=str)
+parser.add_argument('--profile', type=str, default=None)
+parser.add_argument('--region', type=str, default=None)
 
 
 def get_data():
@@ -26,4 +31,22 @@ def generate(stream_name, kinesis_client):
 
 
 if __name__ == '__main__':
-    generate(STREAM_NAME, boto3.client('kinesis'))
+
+    args = parser.parse_args()
+
+    print(f'Sending data to {args.stream_name}')
+    if args.profile:
+        print(f'Using profile {args.profile}')
+        session = boto3.session.Session(profile_name=args.profile)
+    else:
+        print('Using default profile')
+        session = boto3.session.Session()
+    
+    if args.region:
+        print(f'Using region {args.region}')
+        client = session.client('kinesis', region_name=args.region)
+    else:
+        print('Using default region')
+        client = session.client('kinesis')
+
+    generate(args.stream_name, client)
