@@ -27,6 +27,7 @@ ENV PATH "${PATH}:${MINICONDA_HOME}/bin"
 
 
 RUN echo "conda activate pyflink-1-13" >> ~/.bashrc
-RUN conda activate pyflink-1-13
 
-# CMD conda run -n pyflink-1-13 python -c "import pyflink; print(pyflink)"
+# use "conda run -n pyflink-1-13 <my-python-command>" to run some python command or script in pyflink env
+# e.g. docker run -it pyflink conda run -n pyflink-1-13 python -c "import pyflink; print('Successfully imported pyflink')"
+CMD $MINICONDA_HOME/envs/pyflink-1-13/bin/python

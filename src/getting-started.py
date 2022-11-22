@@ -29,13 +29,12 @@ is_local = (
 
 if is_local:
     # only for local, overwrite variable to properties and pass in your jars delimited by a semicolon (;)
-    APPLICATION_PROPERTIES_FILE_PATH = "application_properties.json"  # local
-
-    CURRENT_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+    CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+    APPLICATION_PROPERTIES_FILE_PATH =  os.path.join(CURRENT_DIR, "example_application_properties.json" )
+    JAR_DIR = os.path.realpath(os.path.join(CURRENT_DIR, '..', 'jars'))
     table_env.get_config().get_configuration().set_string(
         "pipeline.jars",
-        "file:///" + CURRENT_DIR + "/jars/flink-sql-connector-kinesis_2.12-1.13.2.jar",
-        # "file:///" + CURRENT_DIR +"/jars/amazon-kinesis-sql-connector-flink-2.4.1-javadoc.jar"
+        "file:///" + JAR_DIR + "/flink-sql-connector-kinesis_2.12-1.13.2.jar"
     )
 
 

@@ -4,24 +4,32 @@
 
 
 ## Build notes
-- Ubuntu
-    - Install gcc
-        - apt install build-essential -y
-    - Install Java
-        - sudo apt install openjdk-8-jre
-        - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-        - sudo update-alternatives --config java # check java install path
-        - sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-openjdk-amd64/bin/java 1 # replace w install path
-
-
-## Download JAR
-From here: https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kinesis_2.12/1.13.2/flink-sql-connector-kinesis_2.12-1.13.2.jar
 
 <br>
 
-## Install apache-flink
-- Create a conda env like so: `conda create -n pyflink-1-13 pip python=3.8`
-- Run `pip install "apache-flink==1.13.6"`
+### Package the zipfile
+
+<br>
+
+- `docker build -f dkr/pyflink.Dockerfile -t pyflink .`
+- To package:
+  - On Linux or Mac:
+    - ./scripts/build-pkg.sh  # note you should run it from the repo root dir
+  - On Windows:
+    - `docker build -f dkr/zip.Dockerfile -t zip .`
+    - `docker run --rm -it -v ${PWD}:/app zip bash /app/scripts/build-pkg.sh` (Does not work in Git Bash on Windows; use PowerShell or WSL)
+
+<br>
+
+### Terraform
+
+<br>
+
+- Create a state file in `./states`
+- Create a `myvars.tfvars` file
+  - Be sure to have an AWS profile setup, as specifed in the `.tfvars` file
+  - Check it with `aws sts get-caller-identity --profile myprofile`
+- Run `terraform apply --var-file myvars.tfvars`
 
 <br>
 
