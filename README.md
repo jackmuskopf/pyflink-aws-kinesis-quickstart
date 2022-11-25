@@ -26,7 +26,7 @@ Also, the [Pyflink KDA Environment](#Pyflink-KDA-Environment) notes indicate wha
 
 ```
 docker build -f dkr/zip.Dockerfile -t zip .
-docker run --rm -it -v ${PWD}:/app zip bash /app/scripts/build-pkg.sh
+docker run --rm -it -v ${PWD}:/app zip bash -c "dos2unix /app/scripts/build-pkg.sh && /app/scripts/build-pkg.sh"
 ```
 - Does not work in Git Bash on Windows ([unless you really want it to](https://github.com/docker-archive/toolbox/issues/673))
   - Use PowerShell or WSL
